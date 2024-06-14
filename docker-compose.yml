@@ -1,0 +1,47 @@
+services:
+
+    mongodb:
+        image: mongodb/mongodb-community-server
+        container_name: mongodb
+        restart: always
+        environment:
+            MONGO_INITDB_DATABASE: host_scans
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: supersecret
+        ports:
+            - 27017:27017
+        volumes:
+            - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro  # Specify the db init script with read-only permissions.
+            - mongodb:/data/db
+        healthcheck:
+            test: [ "CMD","mongosh", "--eval", "db.adminCommand('ping')" ]
+            interval: 20s  # Python and Mongoku need to wait 20 seconds before attempting to authenticate and perform db operations.
+            timeout: 10s
+            retries: 5
+
+    mongoku:
+        image: huggingface/mongoku
+        container_name: mongoku
+        restart: always
+        environment:
+            MONGOKU_DEFAULT_HOST: "mongodb://mongoku-sa:password@mongodb:27017?authSource=host_scans"  # macOS localhost
+        #                          mongodb://root:supersecret@mongodb:27017?authSource=admin
+        ports:
+            - 3100:3100
+        depends_on:
+            mongodb:
+                condition: service_healthy
+
+    interview-silk-ak:
+        image: interview-silk-ak47us/interview-silk-ak47us
+        container_name: interview-silk-ak47us
+        restart: always
+        environment:
+            silk_api_token: "${silk_api_token}"
+        depends_on:
+            mongodb:
+                condition: service_healthy
+        network_mode: host  # Allows the Python code to access localhost, while still allowing the code to run in the IDE.
+
+volumes:
+    mongodb:
