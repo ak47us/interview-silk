@@ -90,7 +90,7 @@ classDiagram
     ```
 6. Access the [Mongoku database UI](http://localhost:3100/servers/mongodb/databases/host_scans/collections/normalized) 
 to verify that data has been loaded into the `normalized` collection.
-7. If you want to regenerate the visualizations, you can run the unit test in `analysis.py`.
+7. If you want to regenerate the visualizations, you can run the unit test in `./src/analysis.py`.
 
 ## Helpful commands
 Shut the implementation down:
