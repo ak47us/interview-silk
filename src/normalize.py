@@ -31,6 +31,19 @@ class QualysScan:
     agentId: str
     scan_data: dict
 
+@dataclass
+class TenableScan:
+    """
+    1 Tenable host scan.
+
+    Attributes:
+        host_name (str)
+        tenable_id (str)
+        scan_data   (dict)
+    """
+    host_name: str
+    tenable_id: str
+    scan_data: dict
 
 # Not used:
 @dataclass
@@ -46,3 +59,4 @@ class HostScan:
     hostname:        str
     CrowdstrikeScan: Optional[CrowdstrikeScan] = None
     QualysScan:      Optional[QualysScan]      = None
+    TenableScan:     Optional[TenableScan]     = None
