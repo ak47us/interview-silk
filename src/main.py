@@ -58,27 +58,27 @@ async def main():
     # Step 3: Analyze the data inside MongoDB:
     # This totally does not scale with large databases. You would want to use the "dask" module to build dataframe in batches.
     # all_documents = [HostScan(hostname = d['hostname'], CrowdstrikeScan = , QualysScan =) for d in normalized.find()]
-    all_documents = list(normalized.find())
-    all_HostScans = [
-                    HostScan(
-                        hostname        = d['hostname'],
-                        CrowdstrikeScan = (
-                            CrowdstrikeScan(
-                                hostname  = cs["hostname"],
-                                device_id = cs["device_id"],
-                                scan_data = cs["scan_data"]
-                            ) if (cs := d.get("CrowdstrikeScan")) else None
-                        ),
-                        QualysScan=(
-                            QualysScan(
-                                dnsHostName = qs["dnsHostName"],
-                                agentId     = qs["agentId"],
-                                scan_data   = qs["scan_data"]
-                            ) if (qs := d.get("QualysScan")) else None
-                        )
-                    ) for d in all_documents
-                    ]
-
+    # all_documents = list(normalized.find())
+    # all_HostScans = [
+    #                 HostScan(
+    #                     hostname        = d['hostname'],
+    #                     CrowdstrikeScan = (
+    #                         CrowdstrikeScan(
+    #                             hostname  = cs["hostname"],
+    #                             device_id = cs["device_id"],
+    #                             scan_data = cs["scan_data"]
+    #                         ) if (cs := d.get("CrowdstrikeScan")) else None
+    #                     ),
+    #                     QualysScan=(
+    #                         QualysScan(
+    #                             dnsHostName = qs["dnsHostName"],
+    #                             agentId     = qs["agentId"],
+    #                             scan_data   = qs["scan_data"]
+    #                         ) if (qs := d.get("QualysScan")) else None
+    #                     )
+    #                 ) for d in all_documents
+    #                 ]
+    print(f"Got {len(all_HostScans)} host scans.")
     # Disabled the visualization step because it can be demonstrated by running the analysis unittests:
     # graph_os_populations(collection   = all_HostScans, destination = './')
     # graph_old_vs_new_hosts(collection = all_HostScans, destination = './')
