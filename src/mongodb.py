@@ -25,6 +25,8 @@ def bulk_write(mongo_collection: pymongo.collection, documents: list) -> BulkWri
             hostname_to_find = d.hostname
         if scan_vendor == 'QualysScan':
             hostname_to_find = d.dnsHostName
+        if scan_vendor == 'TenableScan':
+            hostname_to_find = d.host_name
 
         query_filter = {'hostname': hostname_to_find}
         update_op    = {'$set': {scan_vendor: asdict(d)}}
