@@ -1,7 +1,7 @@
 import asyncio
 import os
 import sys
-from normalize import CrowdstrikeScan, HostScan, QualysScan
+from normalize import CrowdstrikeScan, HostScan, QualysScan, TenableScan
 from pymongo import MongoClient
 from silk import SilkClient
 from mongodb import bulk_write
@@ -27,22 +27,33 @@ async def main():
 
     # Step 1: Extract the data from the Silk API:
     async with SilkClient(silk_api_token = silk_api_token) as silk_client:
-        crowdstrike_data     = await silk_client.get_crowdstrike_data()
-        qualys_data          = await silk_client.get_qualys_data()
+        crowdstrike_data = await silk_client.get_crowdstrike_data()
+        qualys_data      = await silk_client.get_qualys_data()
+        tenable_data     = await silk_client.get_tenable_data()
 
     # Step 2: Transform the data and upload it to MongoDB:
     docs = list()
+    scans = list()
     for item in crowdstrike_data:
         d = CrowdstrikeScan(hostname  = item['hostname'],
                             device_id = item['device_id'],
                             scan_data = item)
-        docs.append(d)
+
+        scans.append(d)
     for item in qualys_data:
         d = QualysScan(dnsHostName=item['dnsHostName'],
                        agentId=item['agentInfo']['agentId'],
                        scan_data=item)
-        docs.append(d)
-    results = bulk_write(mongo_collection = normalized, documents = docs)
+        scans.append(d)
+    for item in tenable_data:
+        d = TenableScan(host_name=item['host_name'],
+                        tenable_id=item['tenable_id'],
+                        scan_data=item)
+        scans.append(d)
+
+
+
+    results = bulk_write(mongo_collection = normalized, documents = scans)
 
     # Step 3: Analyze the data inside MongoDB:
     # This totally does not scale with large databases. You would want to use the "dask" module to build dataframe in batches.
