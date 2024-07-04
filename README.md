@@ -21,8 +21,8 @@ sequenceDiagram
     S ->> A: Receive records from the two data sources in the API.
     end
     Note right of A: 2. Transform the data by combining the two record-types into unified HostScan objects.
-    A ->> N: Populate CrowdstrikeScan and QualysScan records as dataclass instances.
-    N ->> A: Populate CrowdstrikeScan and QualysScan records as dataclass instances.
+    A ->> N: Populate CrowdstrikeScan, QualysScan, and TenableScan records as dataclass instances.
+    N ->> A: Populate CrowdstrikeScan, QualysScan, and TenableScan records as dataclass instances.
     Note right of A: 3. Upload the data to MongoDB
     rect rgb(200, 150, 255)
     A ->> M: Upsert HostScan objects into the database.
@@ -42,6 +42,7 @@ sequenceDiagram
 classDiagram
     HostScan <|-- CrowdstrikeScan
     HostScan <|-- QualysScan
+    HostScan <|-- TenableScan
     class HostScan{
         hostname:        str
         CrowdstrikeScan: Optional[CrowdstrikeScan]
@@ -56,6 +57,11 @@ classDiagram
         dnsHostName: str
         agentId: str
         scan_data: dict
+    }
+    class TenableScan{
+        host_name: str
+        tenable_id: str
+        scan_data:   dict
     }
 ```
 
@@ -138,4 +144,9 @@ hence the low `limit` value on the silk API client.
     - Dataclass: Provides better type safety and can be used with type hints, which improves code readability and helps catch errors during development. IDEs can provide better autocompletion and static analysis.
     - Dataclass: Makes the code more readable by explicitly defining the structure of the data. This self-documenting feature makes it easier to understand and maintain. 
     - Dataclass can be up to 15x faster to access elements.
+- One could re-implement the API client to kick off a batch of asynchronous HTTP calls, based on pagination parameters. This would save lots of time spent waiting for each request.
+- The code could also be re-implemented in Cython or Jython, allowing for faster compiled code when running the analysis and graph generation.
+- For graphing, Pandas can split the data in MongoDB into chunks, which helps for cases where the data is larger than local system memory can allow.
+- The data could also be offloaded to Redis during calculation if it becomes too big.
+- Apache Airflow should also be implemented for improved code readability and to be able to use the UI to see scheduled syncs. Also increases collaboration and transparency.
 </details>
