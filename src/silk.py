@@ -78,6 +78,38 @@ class SilkClient:
         results = await self.get(url)
         return results
 
+    async def get_tenable_data(self, ) -> List:
+        """
+        Perform an HTTP get operation against the Silk Interview API for Tenable hosts.
+        Uses pagination.
+        :return list:
+        """
+        url = f"{self.base_url}/api/tenable/hosts/get"
+        all_data = list()
+        cursor     = ""
+        try:
+            # Loop through the API pages until we get a server error (which means it is the last page):
+            while True:
+                params  = {'limit': self.http_limit,
+                           'cursor':  cursor}
+                headers = {'accept': 'application/json',
+                           'token': self.silk_api_token}
+                async with self.session.post(headers = headers,
+                                             url     = url,
+                                             ssl = False,
+                                             params  = params) as response:
+                    text = await response.text()  # Grab this so we can check the error code.
+                    response.raise_for_status()
+                    data = await response.json()
+                    if len(data['hosts']) == 0:  # No more data returned
+                        break
+                    all_data.extend(data['hosts'])
+                    cursor = data['cursor']
+        except Exception as e:
+            print(f"Exception: {e}")
+
+        return all_data
+
 
 class SilkClientTests(unittest.IsolatedAsyncioTestCase):
 
@@ -102,6 +134,12 @@ class SilkClientTests(unittest.IsolatedAsyncioTestCase):
             qualys_response = await self.silk_client.get_qualys_data()
             print(f"Retrieved {len(qualys_response)} hosts.")
             self.assertIsInstance(qualys_response, list, 'Retrieved a list of hosts from Qualys.')
+
+    async def test_get_tenable_data_success(self):
+        async with self.silk_client:
+            tenable_response = await self.silk_client.get_tenable_data()
+            print(f"Retrieved {len(tenable_response)} hosts.")
+            self.assertIsInstance(tenable_response, list, 'Retrieved a list of hosts from Qualys.')
 
 
 if __name__ == '__main__':
