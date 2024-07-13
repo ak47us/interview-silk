@@ -77,7 +77,7 @@ classDiagram
 
 ## How to deploy
 1. `cd` to the repository directory.
-2. Set your API key by pasting your API key into this one-liner's prompt:
+2. Set your Silk Interview API key by pasting your API key into this one-liner's prompt:
     ```shell
     read -s -p "Paste the value for silk_api_token, then hit ENTER: " silk_api_token && export silk_api_token="$silk_api_token" 
     ```
