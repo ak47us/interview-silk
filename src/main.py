@@ -38,7 +38,6 @@ async def main():
         d = CrowdstrikeScan(hostname  = item['hostname'],
                             device_id = item['device_id'],
                             scan_data = item)
-
         scans.append(d)
     for item in qualys_data:
         d = QualysScan(dnsHostName=item['dnsHostName'],
@@ -58,6 +57,7 @@ async def main():
 
     results = bulk_write_host_scans(mongo_collection = normalized, documents = scans)
 
+    # TO DO: Remove this code. Decided to use Grafana for graphing instead of hand-coding everything.
     # Step 3: Analyze the data inside MongoDB:
     # This totally does not scale with large databases. You would want to use the "dask" module to build dataframe in batches.
     # all_documents = [HostScan(hostname = d['hostname'], CrowdstrikeScan = , QualysScan =) for d in normalized.find()]
