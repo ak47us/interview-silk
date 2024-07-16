@@ -1,0 +1,1233 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Vulnerabilities found",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 1
+      },
+      "id": 16,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 0,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $match: {\n      \"QualysScan.scan_data.vuln.list\": { $exists: true }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: 1,\n      vulnListLength: { $size: \"$QualysScan.scan_data.vuln.list\" }\n    }\n  },\n  {\n    $sort: {\n      vulnListLength: 1 // Use -1 for descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Qualys vulnerabilities detected, per host",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 10,
+        "y": 1
+      },
+      "id": 17,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "allValues"
+          ],
+          "fields": "/^Critical$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 16
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $match: {\n      \"TenableScan.scan_data.vuln_counts.critical\": { $exists: true }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: 1,\n      \"Critical\": \"$TenableScan.scan_data.vuln_counts.critical\"\n    }\n  },\n  {\n    $sort: {\n      \"Critical\": 1 // Use -1 for descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Tenable critical, per host",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 17,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^Critical$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 16
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $match: {\n      \"TenableScan.scan_data.vuln_counts.high\": { $exists: true }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: 1,\n      \"Critical\": \"$TenableScan.scan_data.vuln_counts.high\"\n    }\n  },\n  {\n    $sort: {\n      \"Critical\": 1 // Use -1 for descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Tenable high, per host",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-red",
+            "mode": "shades"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "applyToRow": true,
+              "type": "color-background"
+            },
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "more than 30 days ago?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 184
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": ">30 days ago?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 127
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 9,
+        "x": 0,
+        "y": 8
+      },
+      "id": 22,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": true,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "count"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $project: {\n      hostname: 1,\n      \"Provisioned?\": {\n        $cond: {\n          if: { $eq: [\"$CrowdstrikeScan.scan_data.provision_status\", \"Provisioned\"] },\n          then: true,\n          else: false\n        }\n      },\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      \"Provisioned?\": 1 // Sort by Provisioned? in descending order (true first, false last)\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Crowdstrike management",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Last seen"
+              },
+              {
+                "destinationType": "string",
+                "targetField": "hostname"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {}
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 10,
+        "y": 10
+      },
+      "id": 20,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^Critical$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 16
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $match: {\n      \"TenableScan.scan_data.vuln_counts.medium\": { $exists: true }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: 1,\n      \"Critical\": \"$TenableScan.scan_data.vuln_counts.medium\"\n    }\n  },\n  {\n    $sort: {\n      \"Critical\": 1 // Use -1 for descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Tenable medium, per host",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 17,
+        "y": 10
+      },
+      "id": 19,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^Critical$/",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $match: {\n      \"TenableScan.scan_data.vuln_counts.low\": { $exists: true }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: 1,\n      \"Critical\": \"$TenableScan.scan_data.vuln_counts.low\"\n    }\n  },\n  {\n    $sort: {\n      \"Critical\": 1 // Use -1 for descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Tenable low, per host",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 12,
+      "panels": [],
+      "title": "Host scan status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 20
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $project: {\n      hostname: 1,\n      allScansPresent: {\n        $cond: {\n          if: {\n            $and: [\n              { $gt: [\"$CrowdstrikeScan\", null] },\n              { $gt: [\"$QualysScan\", null] },\n              { $gt: [\"$TenableScan\", null] }\n            ]\n          },\n          then: true,\n          else: false\n        }\n      }\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      total: { $sum: 1 },\n      trueCount: {\n        $sum: {\n          $cond: { if: \"$allScansPresent\", then: 1, else: 0 }\n        }\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      percentage: {\n        $multiply: [{ $divide: [\"$trueCount\", \"$total\"] }, 100]\n      }\n    }\n  }\n]);",
+          "type": "table"
+        }
+      ],
+      "title": "Full coverage status",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "applyToRow": true,
+              "type": "color-background"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Scanned by all 3 providers?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 222
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hostname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 229
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 6,
+        "x": 7,
+        "y": 20
+      },
+      "id": 6,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $project: {\n      hostname: 1,  // Include the hostname field\n      allScansPresent: {\n        $cond: {\n          if: {\n            $and: [\n              { $gt: [\"$CrowdstrikeScan\", null] },\n              { $gt: [\"$QualysScan\", null] },\n              { $gt: [\"$TenableScan\", null] }\n            ]\n          },\n          then: true,\n          else: false\n        }\n      }\n    }\n  },\n  {\n    $group: {\n      _id: \"$hostname\",\n      \"3 scans?\": { $first: \"$allScansPresent\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      hostname: \"$_id\",\n      \"3 scans?\": 1\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Full coverage by 3 providers",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "3 scans?": 1,
+              "hostname": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-red",
+            "mode": "shades"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "applyToRow": true,
+              "type": "color-background"
+            },
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "more than 30 days ago?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 184
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": ">30 days ago?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 127
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 10,
+        "x": 14,
+        "y": 20
+      },
+      "id": 21,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": true,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "count"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $project: {\n      hostname: 1,\n      mostRecentDate: {\n        $max: [\n          '$QualysScan.scan_data.lastComplianceScan',\n          '$CrowdstrikeScan.scan_data.last_seen',\n          '$TenableScan.scan_data.last_observed.date'\n        ]\n      }\n    }\n  },\n  {\n    $group: {\n      _id: \"$hostname\",\n      mostRecentDate: { $max: \"$mostRecentDate\" }\n    }\n  },\n  {\n    $addFields: {\n      \">30 days ago?\": {\n        $cond: [\n          {\n            $lt: [\n              \"$mostRecentDate\",\n              { $subtract: [new Date(), 1000 * 60 * 60 * 24 * 30] }\n            ]\n          },\n          true,\n          false\n        ]\n      }\n    }\n  },\n  {\n    $project: {\n      hostname: '$_id',\n      \"Last seen\": \"$mostRecentDate\",\n      \">30 days ago?\": 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      \"Last seen\": -1\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Last check-in (from any agent)",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Last seen"
+              },
+              {
+                "destinationType": "string",
+                "targetField": "hostname"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {}
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "palette-classic"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 8,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 26
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "basic",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 300,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $project: {\n      field1: {\n        $cond: {\n          if: {\n            $gt: [\"$CrowdstrikeScan\", null]\n          },\n          then: 1,\n          else: 0\n        }\n      },\n      field2: {\n        $cond: {\n          if: {\n            $gt: [\"$QualysScan\", null]\n          },\n          then: 1,\n          else: 0\n        }\n      },\n      field3: {\n        $cond: {\n          if: {\n            $gt: [\"$TenableScan\", null]\n          },\n          then: 1,\n          else: 0\n        }\n      }\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      \"Crowdstrike\": {\n        $sum: \"$field1\"\n      },\n      \"Qualys\": {\n        $sum: \"$field2\"\n      },\n      \"Tenable\": {\n        $sum: \"$field3\"\n      }\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Scans from each data source",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Operating Systems",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 0,
+        "y": 33
+      },
+      "id": 10,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^count$/",
+          "values": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate(\n  [\n    {\n      $group: {\n        _id: {\n          $ifNull: [\n            '$QualysScan.scan_data.os',\n            '$CrowdstrikeScan.scan_data.os_version',\n            '$TenableScan.scan_data.operating_systems'\n          ]\n        },\n        count: { $sum: 1 },\n        results: {\n          $push: { hostname: '$hostname' }\n        }\n      }\n    },\n    {\n      $project: {\n        'Operating System': '$_id',\n        count: 1,\n        results: 1,\n        _id: 0\n      }\n    }\n  ]\n)",
+          "type": "table"
+        }
+      ],
+      "title": "Operating Systems",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-opensource-datasource",
+        "uid": "adrsdg6424wlcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "shades"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "applyToRow": false,
+              "mode": "basic",
+              "type": "color-background"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 58
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Operating System"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 226
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 11,
+        "y": 33
+      },
+      "id": 8,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "db.normalized.aggregate([\n  {\n    $group: {\n      _id: {\n        $ifNull: [\n          '$QualysScan.scan_data.os',\n          '$CrowdstrikeScan.scan_data.os_version',\n          '$TenableScan.scan_data.operating_systems'\n        ]\n      },\n      Count: { $sum: 1 },\n      Hosts: {\n        $push: '$hostname' \n      }\n    }\n  },\n  {\n    $project: {\n      'Operating System': '$_id',\n      Count: 1,\n      Hosts: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Count: -1 // Sort by Count in descending order\n    }\n  }\n])",
+          "type": "table"
+        }
+      ],
+      "title": "Operating Systems",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Operating System": 0,
+              "count": 1,
+              "results": 2
+            },
+            "renameByName": {
+              "count": "",
+              "results": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 14,
+      "panels": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 42
+          },
+          "id": 5,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "11.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-mongodb-opensource-datasource",
+                "uid": "adrsdg6424wlcb"
+              },
+              "rawQuery": true,
+              "refId": "A",
+              "target": "db.normalized.aggregate([{\"$match\": {}}])",
+              "type": "table"
+            }
+          ],
+          "title": "All data",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "grafana-mongodb-opensource-datasource",
+            "uid": "adrsdg6424wlcb"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "fieldMinMax": true,
+              "mappings": [],
+              "max": 8,
+              "min": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 10,
+            "x": 13,
+            "y": 42
+          },
+          "id": 11,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "count"
+              ],
+              "fields": "/.*/",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": false,
+            "sizing": "auto"
+          },
+          "pluginVersion": "11.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "grafana-mongodb-opensource-datasource",
+                "uid": "adrsdg6424wlcb"
+              },
+              "rawQuery": true,
+              "refId": "A",
+              "target": "db.normalized.aggregate([{\"$match\": {}}])",
+              "type": "table"
+            }
+          ],
+          "title": "All data",
+          "type": "gauge"
+        }
+      ],
+      "title": "All data",
+      "type": "row"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Silk dashboard",
+  "uid": "bdrseuhfgzr40f",
+  "version": 43,
+  "weekStart": ""
+}
