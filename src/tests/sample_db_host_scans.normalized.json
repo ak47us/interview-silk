@@ -1,6 +1,6 @@
 [{
   "_id": {
-    "$oid": "666b11b0997424580617f243"
+    "$oid": "66945625ab94b7b84e9092bd"
   },
   "hostname": "ip-172-31-93-76.ec2.internal",
   "CrowdstrikeScan": {
@@ -4366,11 +4366,128 @@
         ]
       }
     }
+  },
+  "TenableScan": {
+    "host_name": "ip-172-31-93-76.ec2.internal",
+    "tenable_id": "c05fe31b956e4d42afddbeb85553ae31",
+    "scan_data": {
+      "_id": "6ae46c5b-9470-4640-b838-3f4021a7a8ff",
+      "agent_name": "ip-172-31-93-76.ec2.internal",
+      "aws_availability_zone": "us-east-1b",
+      "aws_ec2_instance_ami_id": "ami-090fa75af13c156b4",
+      "aws_ec2_instance_group_names": [
+        "autoscaling-security-group-1"
+      ],
+      "aws_ec2_instance_id": "i-086fc5a571e41b095",
+      "aws_ec2_instance_state_name": "stopped",
+      "aws_ec2_instance_type": "t2.micro",
+      "aws_ec2_name": "new-test-instance",
+      "aws_owner_id": "534968039550",
+      "aws_region": "us-east-1",
+      "aws_subnet_id": "subnet-0b06c453de6393244",
+      "aws_vpc_id": "vpc-092653ee3a9df275d",
+      "bios_id": "ec26e6cb-2f47-bf3a-41e3-e75f58b6fc2f",
+      "created": {
+        "$date": "2023-01-06T17:09:03.106Z"
+      },
+      "display_fqdn": "ip-172-31-93-76.ec2.internal",
+      "display_ipv4_address": "172.31.93.76",
+      "display_ipv6_address": "fe80:0:0:0:105e:2eff:fedb:5899",
+      "display_mac_address": "12:5e:2e:db:58:99",
+      "display_operating_system": "Amazon Linux 2",
+      "first_observed": {
+        "$date": "2023-01-06T17:09:02.634Z"
+      },
+      "fqdns": [
+        "ip-172-31-93-76.ec2.internal"
+      ],
+      "has_agent": true,
+      "has_plugin_results": false,
+      "host_name": "ip-172-31-93-76.ec2.internal",
+      "id": "6ae46c5b-9470-4640-b838-3f4021a7a8ff",
+      "installed_software": [
+        "cpe:/a:gnupg:libgcrypt:1.5.3",
+        "cpe:/a:openssl:openssl:1.0.2k",
+        "cpe:/a:openssl:openssl:1.1.1o",
+        "cpe:/a:openssl:openssl:1.1.1q",
+        "cpe:/a:openssl:openssl:3.0.7",
+        "cpe:/a:tenable:nessus_agent:10.3.1",
+        "cpe:/a:crowdstrike:falcon_sensor:6.45.0",
+        "cpe:/a:openssl:openssl:3.0.8",
+        "cpe:/a:tenable:nessus_agent:10.3.2"
+      ],
+      "ipv4_addresses": [
+        "172.31.93.76"
+      ],
+      "ipv6_addresses": [
+        "fe80:0:0:0:105e:2eff:fedb:5899"
+      ],
+      "is_deleted": false,
+      "is_licensed": false,
+      "is_public": false,
+      "last_authenticated_scan_time": "2023-03-15T21:01:54.000Z",
+      "last_licensed_scan_time": {
+        "$date": "2023-03-15T21:01:54.000Z"
+      },
+      "last_observed": {
+        "$date": "2023-09-05T19:09:40.923Z"
+      },
+      "last_scan_target": "172.31.93.76",
+      "mac_addresses": [
+        "12:5e:2e:db:58:99"
+      ],
+      "name": "ip-172-31-93-76.ec2.internal",
+      "network": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Default"
+      },
+      "observation_sources": [
+        {
+          "first_observed": "2023-01-06T17:09:02.634Z",
+          "last_observed": "2023-09-05T19:09:40.923Z",
+          "name": "AWS"
+        },
+        {
+          "first_observed": "2023-01-11T19:31:39.636Z",
+          "last_observed": "2023-03-15T21:05:19.960Z",
+          "name": "NESSUS_AGENT"
+        }
+      ],
+      "operating_systems": [
+        "Amazon Linux 2"
+      ],
+      "sources": [
+        "AWS",
+        "NESSUS_AGENT"
+      ],
+      "system_type": "aws-ec2-instance",
+      "tags": [
+        {
+          "id": "4ffd5a28-27c3-45f1-a553-de6a238df0db",
+          "category": "Critical Assets",
+          "value": "HIPAA",
+          "type": "dynamic"
+        }
+      ],
+      "tenable_id": "c05fe31b956e4d42afddbeb85553ae31",
+      "types": [
+        "host"
+      ],
+      "updated": {
+        "$date": "2023-09-05T19:09:49.705Z"
+      },
+      "vuln_counts": {
+        "high": 3,
+        "critical": 4,
+        "low": 1,
+        "medium": 24
+      }
+    }
   }
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f244"
+    "$oid": "66945625ab94b7b84e9092be"
   },
   "hostname": "ip-172-31-14-41.ec2.internal",
   "CrowdstrikeScan": {
@@ -8771,7 +8888,7 @@
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f245"
+    "$oid": "66945625ab94b7b84e9092bf"
   },
   "hostname": "ip-172-31-19-223.ec2.internal",
   "CrowdstrikeScan": {
@@ -13882,11 +13999,129 @@
         ]
       }
     }
+  },
+  "TenableScan": {
+    "host_name": "ip-172-31-19-223.ec2.internal",
+    "tenable_id": "0011b9bb7e8247ba91f8286eff42187f",
+    "scan_data": {
+      "_id": "7b4227f9-53cc-493a-8959-5abdc25a59b8",
+      "agent_name": "ip-172-31-19-223.ec2.internal",
+      "aws_availability_zone": "us-east-1c",
+      "aws_ec2_instance_ami_id": "ami-024bc1da6bc3c5973",
+      "aws_ec2_instance_group_names": [
+        "autoscaling-security-group-1"
+      ],
+      "aws_ec2_instance_id": "i-0f74daf3d7225083a",
+      "aws_ec2_instance_state_name": "running",
+      "aws_ec2_instance_type": "t2.micro",
+      "aws_ec2_name": "incremental-sync-ec2",
+      "aws_owner_id": "534968039550",
+      "aws_region": "us-east-1",
+      "aws_subnet_id": "subnet-01f8e12a21584302c",
+      "aws_vpc_id": "vpc-092653ee3a9df275d",
+      "bios_id": "ec2ae369-0aef-2bd5-dfb5-dfca408f0222",
+      "created": {
+        "$date": "2023-01-06T17:09:03.108Z"
+      },
+      "display_fqdn": "ip-172-31-19-223.ec2.internal",
+      "display_ipv4_address": "18.212.216.193",
+      "display_ipv6_address": "fe80:0:0:0:89a:eff:feba:3fd9",
+      "display_mac_address": "0a:9a:0e:ba:3f:d9",
+      "display_operating_system": "Linux Kernel 5.10.135-122.509.amzn2.x86_64 on Amazon Linux 2",
+      "first_observed": {
+        "$date": "2023-01-06T17:09:02.634Z"
+      },
+      "fqdns": [
+        "ip-172-31-19-223.ec2.internal",
+        "ec2-18-212-216-193.compute-1.amazonaws.com"
+      ],
+      "has_agent": true,
+      "has_plugin_results": true,
+      "host_name": "ip-172-31-19-223.ec2.internal",
+      "id": "7b4227f9-53cc-493a-8959-5abdc25a59b8",
+      "installed_software": [
+        "cpe:/a:gnupg:libgcrypt:1.5.3",
+        "cpe:/a:openssl:openssl:1.0.2k",
+        "cpe:/a:openssl:openssl:1.1.1k",
+        "cpe:/a:openssl:openssl:1.1.1q",
+        "cpe:/a:openssl:openssl:3.0.7",
+        "cpe:/a:tenable:nessus_agent:10.3.1",
+        "cpe:/a:crowdstrike:falcon_sensor:6.45.0",
+        "cpe:/a:openssl:openssl:1.1.1s"
+      ],
+      "ipv4_addresses": [
+        "172.31.19.223",
+        "18.212.216.193"
+      ],
+      "ipv6_addresses": [
+        "fe80:0:0:0:89a:eff:feba:3fd9"
+      ],
+      "is_deleted": false,
+      "is_licensed": false,
+      "is_public": true,
+      "last_authenticated_scan_time": "2023-03-09T20:55:47.000Z",
+      "last_licensed_scan_time": {
+        "$date": "2023-03-09T20:55:47.000Z"
+      },
+      "last_observed": {
+        "$date": "2023-09-05T19:09:40.922Z"
+      },
+      "last_scan_target": "172.31.19.223",
+      "mac_addresses": [
+        "0a:9a:0e:ba:3f:d9"
+      ],
+      "name": "ip-172-31-19-223.ec2.internal",
+      "network": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Default"
+      },
+      "observation_sources": [
+        {
+          "first_observed": "2023-01-06T17:09:02.634Z",
+          "last_observed": "2023-09-05T19:09:40.922Z",
+          "name": "AWS"
+        },
+        {
+          "first_observed": "2023-01-11T19:26:31.582Z",
+          "last_observed": "2023-03-09T20:55:47.000Z",
+          "name": "NESSUS_AGENT"
+        }
+      ],
+      "operating_systems": [
+        "Linux Kernel 5.10.135-122.509.amzn2.x86_64 on Amazon Linux 2"
+      ],
+      "sources": [
+        "AWS",
+        "NESSUS_AGENT"
+      ],
+      "system_type": "aws-ec2-instance",
+      "tags": [
+        {
+          "id": "4ffd5a28-27c3-45f1-a553-de6a238df0db",
+          "category": "Critical Assets",
+          "value": "HIPAA",
+          "type": "dynamic"
+        }
+      ],
+      "tenable_id": "0011b9bb7e8247ba91f8286eff42187f",
+      "types": [
+        "host"
+      ],
+      "updated": {
+        "$date": "2023-09-05T19:09:46.240Z"
+      },
+      "vuln_counts": {
+        "high": 4,
+        "critical": 4,
+        "low": 3,
+        "medium": 37
+      }
+    }
   }
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f246"
+    "$oid": "66945625ab94b7b84e9092c0"
   },
   "hostname": "ip-172-31-94-229.ec2.internal",
   "CrowdstrikeScan": {
@@ -18268,11 +18503,136 @@
         ]
       }
     }
+  },
+  "TenableScan": {
+    "host_name": "ip-172-31-94-229.ec2.internal",
+    "tenable_id": "18880849b87a40739dadcfdbea7f1e7e",
+    "scan_data": {
+      "_id": "0429c29a-eb33-4803-a27a-4015993e7a89",
+      "agent_name": "ip-172-31-94-229.ec2.internal",
+      "aws_availability_zone": "us-east-1b",
+      "aws_ec2_instance_ami_id": "ami-0cff7528ff583bf9a",
+      "aws_ec2_instance_group_names": [
+        "launch-wizard-4"
+      ],
+      "aws_ec2_instance_id": "i-04d75f5d8db35c016",
+      "aws_ec2_instance_state_name": "running",
+      "aws_ec2_instance_type": "t2.micro",
+      "aws_ec2_name": "amzn-linux host",
+      "aws_owner_id": "534968039550",
+      "aws_region": "us-east-1",
+      "aws_subnet_id": "subnet-0b06c453de6393244",
+      "aws_vpc_id": "vpc-092653ee3a9df275d",
+      "bios_id": "ec2e3b32-00c3-63e0-1f28-a677bf85c56f",
+      "created": {
+        "$date": "2023-01-06T17:09:03.103Z"
+      },
+      "display_fqdn": "ip-172-31-94-229.ec2.internal",
+      "display_ipv4_address": "54.175.33.9",
+      "display_ipv6_address": "fe80:0:0:0:107c:1ff:fe82:6b4f",
+      "display_mac_address": "12:7c:01:82:6b:4f",
+      "display_operating_system": "Linux Kernel 5.10.118-111.515.amzn2.x86_64 on Amazon Linux 2",
+      "first_observed": {
+        "$date": "2023-01-06T17:09:02.634Z"
+      },
+      "fqdns": [
+        "ip-172-31-94-229.ec2.internal",
+        "ec2-54-175-33-9.compute-1.amazonaws.com"
+      ],
+      "has_agent": true,
+      "has_plugin_results": true,
+      "host_name": "ip-172-31-94-229.ec2.internal",
+      "id": "0429c29a-eb33-4803-a27a-4015993e7a89",
+      "installed_software": [
+        "cpe:/a:amazon:corretto:17.0.5.8.1",
+        "cpe:/a:gnupg:libgcrypt:1.5.3",
+        "cpe:/a:openssl:openssl:1.0.2k",
+        "cpe:/a:openssl:openssl:1.1.1k",
+        "cpe:/a:openssl:openssl:1.1.1o",
+        "cpe:/a:openssl:openssl:3.0.7",
+        "cpe:/a:tenable:nessus_agent:10.3.1",
+        "cpe:/a:crowdstrike:falcon_sensor:6.45.0",
+        "cpe:/a:java:jre:17.0.5.8.1"
+      ],
+      "ipv4_addresses": [
+        "172.31.94.229",
+        "54.175.33.9"
+      ],
+      "ipv6_addresses": [
+        "fe80:0:0:0:107c:1ff:fe82:6b4f"
+      ],
+      "is_deleted": false,
+      "is_licensed": false,
+      "is_public": true,
+      "last_authenticated_scan_time": "2023-03-10T01:08:47.000Z",
+      "last_licensed_scan_time": {
+        "$date": "2023-03-10T01:08:47.000Z"
+      },
+      "last_observed": {
+        "$date": "2023-09-05T19:09:40.923Z"
+      },
+      "last_scan_target": "54.175.33.9",
+      "mac_addresses": [
+        "12:7c:01:82:6b:4f"
+      ],
+      "name": "ip-172-31-94-229.ec2.internal",
+      "network": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Default"
+      },
+      "observation_sources": [
+        {
+          "first_observed": "2023-01-06T17:09:02.634Z",
+          "last_observed": "2023-09-05T19:09:40.923Z",
+          "name": "AWS"
+        },
+        {
+          "first_observed": "2023-01-11T19:30:18.832Z",
+          "last_observed": "2023-03-10T01:08:47.000Z",
+          "name": "NESSUS_AGENT"
+        },
+        {
+          "first_observed": "2023-05-02T19:52:39.933Z",
+          "last_observed": "2023-05-02T19:52:39.933Z",
+          "name": "NESSUS_SCAN"
+        }
+      ],
+      "operating_systems": [
+        "Linux Kernel 5.10.118-111.515.amzn2.x86_64 on Amazon Linux 2"
+      ],
+      "sources": [
+        "AWS",
+        "NESSUS_AGENT",
+        "NESSUS_SCAN"
+      ],
+      "system_type": "aws-ec2-instance",
+      "tags": [
+        {
+          "id": "4ffd5a28-27c3-45f1-a553-de6a238df0db",
+          "category": "Critical Assets",
+          "value": "HIPAA",
+          "type": "dynamic"
+        }
+      ],
+      "tenable_id": "18880849b87a40739dadcfdbea7f1e7e",
+      "types": [
+        "host"
+      ],
+      "updated": {
+        "$date": "2023-09-05T19:09:46.897Z"
+      },
+      "vuln_counts": {
+        "high": 7,
+        "critical": 8,
+        "low": 4,
+        "medium": 40
+      }
+    }
   }
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f247"
+    "$oid": "66945625ab94b7b84e9092c1"
   },
   "hostname": "ip-172-31-27-66.ec2.internal",
   "CrowdstrikeScan": {
@@ -19407,11 +19767,143 @@
         ]
       }
     }
+  },
+  "TenableScan": {
+    "host_name": "ip-172-31-27-66.ec2.internal",
+    "tenable_id": "9a7ba8fef975467a9af657f03c2220b8",
+    "scan_data": {
+      "_id": "7f9b9520-44d2-4e3f-832c-061065c8de12",
+      "agent_name": "ip-172-31-27-66.ec2.internal",
+      "aws_availability_zone": "us-east-1c",
+      "aws_ec2_instance_ami_id": "ami-090fa75af13c156b4",
+      "aws_ec2_instance_group_names": [
+        "autoscaling-security-group-1"
+      ],
+      "aws_ec2_instance_id": "i-00243621465aa8bd0",
+      "aws_ec2_instance_state_name": "running",
+      "aws_ec2_instance_type": "t2.micro",
+      "aws_ec2_name": "agent-install-script",
+      "aws_owner_id": "534968039550",
+      "aws_region": "us-east-1",
+      "aws_subnet_id": "subnet-01f8e12a21584302c",
+      "aws_vpc_id": "vpc-092653ee3a9df275d",
+      "bios_id": "ec2b002a-2e11-3bd5-b576-3aa240f82513",
+      "created": {
+        "$date": "2023-01-06T17:09:03.106Z"
+      },
+      "display_fqdn": "ip-172-31-27-66.ec2.internal",
+      "display_ipv4_address": "54.147.184.66",
+      "display_ipv6_address": "fe80:0:0:0:8ef:8aff:fe22:3a8d",
+      "display_mac_address": "0a:ef:8a:22:3a:8d",
+      "display_operating_system": "Linux Kernel 5.10.130-118.517.amzn2.x86_64 on Amazon Linux 2",
+      "first_observed": {
+        "$date": "2023-01-06T17:09:02.634Z"
+      },
+      "fqdns": [
+        "ip-172-31-27-66.ec2.internal",
+        "ec2-54-147-184-66.compute-1.amazonaws.com"
+      ],
+      "has_agent": true,
+      "has_plugin_results": true,
+      "host_name": "ip-172-31-27-66.ec2.internal",
+      "id": "7f9b9520-44d2-4e3f-832c-061065c8de12",
+      "installed_software": [
+        "cpe:/a:amazon:corretto:17.0.5.8.1",
+        "cpe:/a:gnupg:libgcrypt:1.5.3",
+        "cpe:/a:openssl:openssl:1.0.2k",
+        "cpe:/a:openssl:openssl:1.1.1k",
+        "cpe:/a:crowdstrike:falcon_sensor:6.45.0",
+        "cpe:/a:java:jre:17.0.5.8.1",
+        "cpe:/a:openssl:openssl:1.1.1s",
+        "cpe:/a:openssl:openssl:3.0.8",
+        "cpe:/a:tenable:nessus_agent:10.3.2"
+      ],
+      "ipv4_addresses": [
+        "172.31.27.66",
+        "54.147.184.66"
+      ],
+      "ipv6_addresses": [
+        "fe80:0:0:0:8ef:8aff:fe22:3a8d"
+      ],
+      "is_deleted": false,
+      "is_licensed": false,
+      "is_public": true,
+      "last_authenticated_scan_time": "2023-04-25T21:40:08.000Z",
+      "last_licensed_scan_time": {
+        "$date": "2023-04-25T21:40:08.000Z"
+      },
+      "last_observed": {
+        "$date": "2023-09-05T19:09:40.923Z"
+      },
+      "last_scan_target": "172.31.27.66",
+      "mac_addresses": [
+        "0a:ef:8a:22:3a:8d"
+      ],
+      "mitigations": [
+        {
+          "last_detected": "2023-05-19T16:23:22.187Z",
+          "disposition": "SYSTEM_DEFINED",
+          "cpe": "cpe:2.3:a:crowdstrike:falcon_sensor:6.45.0:-:-:-:-:-:-:-",
+          "vendor_name": "CrowdStrike",
+          "id": "9ae85d024067c63c2c01ad34ccc7e815",
+          "version": "6.45.0",
+          "product_name": "Falcon Sensor",
+          "form_factor": "EPP_EDR"
+        }
+      ],
+      "name": "ip-172-31-27-66.ec2.internal",
+      "network": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Default"
+      },
+      "observation_sources": [
+        {
+          "first_observed": "2023-01-06T17:09:02.634Z",
+          "last_observed": "2023-09-05T19:09:40.923Z",
+          "name": "AWS"
+        },
+        {
+          "first_observed": "2023-01-11T19:31:25.187Z",
+          "last_observed": "2023-04-25T21:40:08.000Z",
+          "name": "NESSUS_AGENT"
+        }
+      ],
+      "operating_systems": [
+        "Linux Kernel 5.10.130-118.517.amzn2.x86_64 on Amazon Linux 2"
+      ],
+      "protection_level": 1,
+      "sources": [
+        "AWS",
+        "NESSUS_AGENT"
+      ],
+      "system_type": "aws-ec2-instance",
+      "tags": [
+        {
+          "id": "4ffd5a28-27c3-45f1-a553-de6a238df0db",
+          "category": "Critical Assets",
+          "value": "HIPAA",
+          "type": "dynamic"
+        }
+      ],
+      "tenable_id": "9a7ba8fef975467a9af657f03c2220b8",
+      "types": [
+        "host"
+      ],
+      "updated": {
+        "$date": "2023-09-05T19:09:53.018Z"
+      },
+      "vuln_counts": {
+        "high": 8,
+        "critical": 3,
+        "low": 5,
+        "medium": 48
+      }
+    }
   }
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f248"
+    "$oid": "66945625ab94b7b84e9092c2"
   },
   "hostname": "ip-172-31-60-172.ec2.internal",
   "CrowdstrikeScan": {
@@ -23957,7 +24449,7 @@
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f249"
+    "$oid": "66945625ab94b7b84e9092c3"
   },
   "hostname": "yoavs-mbp-2.lan",
   "CrowdstrikeScan": {
@@ -24075,7 +24567,7 @@
 },
 {
   "_id": {
-    "$oid": "666b11b0997424580617f24a"
+    "$oid": "66945625ab94b7b84e9092c4"
   },
   "hostname": "ec2amaz-e8fae79",
   "QualysScan": {
