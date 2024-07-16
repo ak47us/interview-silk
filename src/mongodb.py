@@ -2,7 +2,7 @@ import json
 import unittest
 import pymongo.collection
 from dataclasses import asdict
-from normalize import CrowdstrikeScan, QualysScan
+from normalize import CrowdstrikeScan, QualysScan, TenableScan
 from pymongo import MongoClient
 from pymongo.collection import BulkWriteResult
 from pymongo.errors import BulkWriteError
@@ -63,6 +63,8 @@ class MongoDBClientTests(unittest.IsolatedAsyncioTestCase):
             crowdstrike_data = json.load(file)
         with open('tests/sample_qualys_data.json', 'r') as file:
             qualys_data = json.load(file)
+        with open('tests/sample_tenable_data.json', 'r') as file:
+            tenable_data = json.load(file)
 
         # Step 2: Compile our scans from our two sources.
         # This can be made faster with a list comprehension or a map().
