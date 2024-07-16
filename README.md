@@ -1,10 +1,36 @@
 # Silk/Armis interview 2024
 
-## Overview
 
+## Overview
 This is an ETL pipeline developed as part of Silk's interview technical challenge in June 2024.
-It is a sophisticated integration that allows for additional SaaS apps to be integrated later.
-See also the [project instructions](./project_instructions/instructions.md).
+The pipeline aggregates security data from three sources: Crowdstrike, Qualys, and Tenable.
+The project is built on Grafana, MongoDB, and Python.
+It is a sophisticated program that allows for additional SaaS apps to be integrated later.
+See [project instructions](./project_instructions/instructions.md) for interview specifications.
+
+
+### Technical interview #1
+After passing the take-home assignment, I was called in for a technical interview. They asked me to add add an additional integration to the project, Tenable. I implemented a new API-extract step and integrated the Tenable data into the existing HostScans schema.
+
+
+### Technical interview #2
+I was called in for an additional technical interview, where I was asked to add an aggregation step to the data pipeline to compile all installed applications on a host using the following instructions:
+```
+You should extract software names from Tenable / Qualys (not crowdstrike)
+You will create a data model (Software name, vendor, version)
+You will need to properly normalize the software name into the model and deal with partial data
+Parse CPE from Tenable
+Simple normalization from Qualys
+Save the software names into a seperate mongo collection
+
+
+Update the normalized host asset to include a list of installed software
+Make sure to handle matching software names due to slight differences in names / versions *Keep a lookup table for when apps change names across versions*
+You’ll need a better normalization or fuzzy matching
+(Potential) Write deduping logic for installed software from the source
+(Potential) Aggregate this data in a different report
+```
+
 
 ### System diagram
 ```mermaid
@@ -31,11 +57,8 @@ sequenceDiagram
     end
     Note right of A: 4. Generate visualizations
     A ->> V: Generate graphs to display metrics found in the data.
-
-
-    
-    
 ```
+
 
 ### Data structure:
 ```mermaid
@@ -66,7 +89,7 @@ classDiagram
 ```
 
 
-### Example data visualizations:
+### Sample data visualizations using Pandas and Matplotlib:
 #### The majority of the hosts in our environment are Amazon Linux, no other Linux distros found:
 ![visual](./local_output/os_populations_2024-06-14%2012:38:55.413765+00:00.png)
 #### From the small sample of ~8 hosts, it appears that all of them were first seen more than 30 days ago:
