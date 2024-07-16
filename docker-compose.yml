@@ -1,5 +1,22 @@
 services:
 
+    grafana:
+        # I wanted to use Grafana because it is faster to customize visualizations than using matplotlib.
+        # We have to use this specific version (only for the interview) because the official one is not free.
+        image: ghcr.io/ajeje93/grafana-mongodb-docker
+        container_name: grafana
+        restart: always
+        environment:
+            GF_INSTALL_PLUGINS: grafana-mongodb-datasource
+            GF_SECURITY_ADMIN_USER: grafana_user
+            GF_SECURITY_ADMIN_PASSWORD: password
+        ports:
+            - 3000:3000
+        volumes:
+            - grafana:/var/lib/grafana
+        depends_on:
+            - mongodb
+
     mongodb:
         image: mongodb/mongodb-community-server
         container_name: mongodb
@@ -19,18 +36,18 @@ services:
             timeout: 10s
             retries: 5
 
-    mongoku:
-        image: huggingface/mongoku
-        container_name: mongoku
-        restart: always
-        environment:
-            MONGOKU_DEFAULT_HOST: "mongodb://mongoku-sa:password@mongodb:27017?authSource=host_scans"  # macOS localhost
-        #                          mongodb://root:supersecret@mongodb:27017?authSource=admin
-        ports:
-            - 3100:3100
-        depends_on:
-            mongodb:
-                condition: service_healthy
+#    mongoku:
+#        image: huggingface/mongoku
+#        container_name: mongoku
+#        restart: always
+#        environment:
+#            MONGOKU_DEFAULT_HOST: "mongodb://mongoku-sa:password@mongodb:27017?authSource=host_scans"  # macOS localhost
+#        #                          mongodb://root:supersecret@mongodb:27017?authSource=admin
+#        ports:
+#            - 3100:3100
+#        depends_on:
+#            mongodb:
+#                condition: service_healthy
 
     interview-silk-ak:
         image: interview-silk-ak47us/interview-silk-ak47us
@@ -44,4 +61,5 @@ services:
         network_mode: host  # Allows the Python code to access localhost, while still allowing the code to run in the IDE.
 
 volumes:
+    grafana:
     mongodb:
