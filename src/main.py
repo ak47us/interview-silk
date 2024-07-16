@@ -49,10 +49,29 @@ async def main():
                         tenable_id=item['tenable_id'],
                         scan_data=item)
         scans.append(d)
+    del crowdstrike_data, qualys_data, tenable_data
+
+    # Parse out the software lists. Outputs a list of apps. Output to a separate collection.
+    apps = list()
+    for scan in scans:
+        path = str()
+        scan_vendor = type(d).__name__
+        if scan_vendor == 'QualysScan' or scan_vendor == 'TenableScan':
+            if scan_vendor == 'QualysScan':
+                path = "scan_data.software.list"
+            if scan_vendor == 'TenableScan':
+                path = "scan_data.installed_software"
+
+            keys = path.split('.')
+            current_dict = scan
 
 
-
-    results = bulk_write(mongo_collection = normalized, documents = scans)
+            try:
+                for key in keys:
+                    current_dict = getattr(current_dict, key)
+            except KeyError:
+                print(f"path not found: {path}")
+        scan_vendor = str()
 
 
     results = bulk_write_host_scans(mongo_collection = normalized, documents = scans)
