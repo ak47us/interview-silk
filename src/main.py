@@ -4,7 +4,7 @@ import sys
 from normalize import CrowdstrikeScan, HostScan, QualysScan, TenableScan
 from pymongo import MongoClient
 from silk import SilkClient
-from mongodb import bulk_write
+from mongodb import bulk_write_host_scans
 from analysis import *
 
 
@@ -54,6 +54,9 @@ async def main():
 
 
     results = bulk_write(mongo_collection = normalized, documents = scans)
+
+
+    results = bulk_write_host_scans(mongo_collection = normalized, documents = scans)
 
     # Step 3: Analyze the data inside MongoDB:
     # This totally does not scale with large databases. You would want to use the "dask" module to build dataframe in batches.
