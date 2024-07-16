@@ -12,6 +12,15 @@ db.createUser({
     ]
 });
 
+// Set up service account for Grafana:
+db.createUser({
+    user: "grafana-sa",
+    pwd:  "password",
+    roles: [
+        { role: "read", db: "host_scans" }
+    ]
+});
+
 // Set up service account for Mongoku:
 db.createUser({
     user: "mongoku-sa",
