@@ -41,6 +41,7 @@ services:
 #        container_name: mongoku
 #        restart: always
 #        environment:
+#            # 6. Access the [Mongoku database UI](http://localhost:3100/servers/mongodb/databases/host_scans/collections/normalized)
 #            MONGOKU_DEFAULT_HOST: "mongodb://mongoku-sa:password@mongodb:27017?authSource=host_scans"  # macOS localhost
 #        #                          mongodb://root:supersecret@mongodb:27017?authSource=admin
 #        ports:
