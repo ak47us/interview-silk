@@ -8,7 +8,7 @@ from normalize import HostScan, CrowdstrikeScan, QualysScan, TenableScan
 
 def safe_get(nested_dict: HostScan, path: str):
     """
-    Check if a given field exists and is not None in a nested dictionary.
+    Check if a given field exists and is not `None` in a nested dictionary.
 
     :param nested_dict: The nested dictionary to check.
     :param path: List of keys representing the path to the field. Example: "CrowdstrikeScan.scan_data.os_version"
