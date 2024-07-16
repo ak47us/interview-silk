@@ -81,6 +81,11 @@ class MongoDBClientTests(unittest.IsolatedAsyncioTestCase):
                             agentId      = item['agentInfo']['agentId'],
                             scan_data    = item)
             docs.append(d)
+        for item in tenable_data:
+            d = TenableScan(host_name=item['host_name'],
+                            tenable_id=item['tenable_id'],
+                            scan_data=item)
+            docs.append(d)
 
         # Step 3: Write our scans to the database in a way that matches them to the correct hostnames.
         results = bulk_write_host_scans(mongo_collection = self.normalized, documents = docs)
