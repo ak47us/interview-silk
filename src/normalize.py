@@ -56,7 +56,19 @@ class HostScan:
         CrowdstrikeScan: Optional[CrowdstrikeScan] Optional nested object to normalize the two data sources.
         QualysScan:      Optional[QualysScan]      Optional nested object to normalize the two data sources.
     """
+@dataclass
+class HostScan:
+    """
+    1 host with all related scans.
+
+    Attributes:
+        hostname (str) The hostname of the scanned host/device.
+        CrowdstrikeScan: Optional[CrowdstrikeScan] Optional nested object to normalize the two data sources.
+        QualysScan:      Optional[QualysScan]      Optional nested object to normalize the two data sources.
+    """
     hostname:        str
     CrowdstrikeScan: Optional[CrowdstrikeScan] = None
     QualysScan:      Optional[QualysScan]      = None
     TenableScan:     Optional[TenableScan]     = None
+    install_apps:    Optional[List[App]]       = None
+
