@@ -8,7 +8,7 @@ from pymongo.collection import BulkWriteResult
 from pymongo.errors import BulkWriteError
 
 
-def bulk_write(mongo_collection: pymongo.collection, documents: list) -> BulkWriteResult:
+def bulk_write_host_scans(mongo_collection: pymongo.collection, documents: list) -> BulkWriteResult:
     """
     Upsert many host scans into the database.
     https://www.mongodb.com/docs/languages/python/pymongo-driver/current/write/bulk-write/#bulk-write-operations
@@ -83,7 +83,7 @@ class MongoDBClientTests(unittest.IsolatedAsyncioTestCase):
             docs.append(d)
 
         # Step 3: Write our scans to the database in a way that matches them to the correct hostnames.
-        results = bulk_write(mongo_collection = self.normalized, documents = docs)
+        results = bulk_write_host_scans(mongo_collection = self.normalized, documents = docs)
         self.assertIsInstance(results, BulkWriteResult, 'Successfully loaded and updated scans into the collection.')
 
 
