@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 import pandas as pd
 import unittest
-from normalize import HostScan, CrowdstrikeScan, QualysScan
+from normalize import HostScan, CrowdstrikeScan, QualysScan, TenableScan
 
 
 def safe_get(nested_dict: HostScan, path: str):
@@ -175,6 +175,7 @@ class AnalysisTests(unittest.TestCase):
     """Run each test in parallel to save time"""
 
     def setUp(self):
+        """Load the MongoDB sample data into a "collection" variable. """
         with open("tests/sample_db_host_scans.normalized.json", "r") as file:
             self.collection = json.load(file)
             file.close()
@@ -194,6 +195,13 @@ class AnalysisTests(unittest.TestCase):
                             agentId     = qs["agentId"],
                             scan_data   = qs["scan_data"]
                         ) if (qs := d.get("QualysScan")) else None
+                    ),
+                    TenableScan = (
+                        TenableScan(
+                            host_name  = ts['host_name'],
+                            tenable_id = ts['tenable_id'],
+                            scan_data  = ts
+                        ) if (ts := d.get("QualysScan")) else None
                     )
                 ) for d in self.collection
             ]
