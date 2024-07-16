@@ -8,7 +8,7 @@ The project is built on Grafana, MongoDB, and Python.
 It is a sophisticated program that allows for additional SaaS apps to be integrated later.
 See [project instructions](./project_instructions/instructions.md) for interview specifications.
 
-![Silk dashboard - Grafana.png](grafana Silk dashboard - Grafana.png)
+![Silk dashboard - Grafana.png](grafana/Silk dashboard - Grafana.png)
 
 ### Technical interview #1
 After passing the take-home assignment, I was called in for a technical interview. They asked me to add add an additional integration to the project, Tenable. I implemented a new API-extract step and integrated the Tenable data into the existing HostScans schema.
