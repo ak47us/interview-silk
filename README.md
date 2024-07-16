@@ -88,15 +88,21 @@ classDiagram
     ```
 4. Build the Python container:
     ```shell
-   docker build --tag interview-silk-ak47us/interview-silk-ak47us .
-   ```
-5. Bring the implementation up:
-    ```shell
-     docker-compose down -v --remove-orphans; docker-compose up --build -d ;
+    docker build --tag interview-silk-ak47us/interview-silk-ak47us .
     ```
-6. Access the [Mongoku database UI](http://localhost:3100/servers/mongodb/databases/host_scans/collections/normalized) 
-to verify that data has been loaded into the `normalized` collection.
-7. If you want to regenerate the visualizations, you can run the unit test in `./src/analysis.py`.
+5. Bring Grafana and MongoDB up and run 1 ETL job:
+    ```shell
+    docker-compose up --build -d ;
+    ```
+6. Sign in to the [Grafana UI](http://localhost:3000) using the credentials from [the MongoDB service account setup](db/mongo-init.js).
+7. Navigate to the [Grafana datasources](http://localhost:3000/connections/datasources/new).
+8. Search for `MongoDB` and click the _Unsigned_ opensource source-type:
+    ![visual](grafana/grafana data sources UI.png)
+9. Configure the MongoDB connection like this:
+    ![visual](grafana/MongoDB settings for Grafana.png)
+10. Apply the Grafana dashboard [configuration file](grafana/dashboard.json) by clicking the _New>Import_ button in [Grafana](http://localhost:3000/dashboards).
+11. To verify that data has been loaded into MongoDB, you load the dashboard [here](http://localhost:3000/dashboards) or use [Compass](https://www.mongodb.com/products/tools/compass).
+12. If you want to generate the offline visualizations, you can run the unit test in `./src/analysis.py`.
 
 ## Helpful commands
 Shut the implementation down:
