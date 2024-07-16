@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import List, Optional
 
 
 @dataclass
@@ -56,6 +56,10 @@ class HostScan:
         CrowdstrikeScan: Optional[CrowdstrikeScan] Optional nested object to normalize the two data sources.
         QualysScan:      Optional[QualysScan]      Optional nested object to normalize the two data sources.
     """
+    vendor: str
+    app_name: str
+    version_installed: str
+
 @dataclass
 class HostScan:
     """
