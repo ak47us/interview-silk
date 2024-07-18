@@ -9,7 +9,7 @@ It is a sophisticated program that allows for additional SaaS apps to be integra
 See [project instructions](./project_instructions/instructions.md) for interview specifications.
 
 ![Silk dashboard - Grafana](grafana/Silk%20dashboard%20-%20Grafana.png)
- 
+
 ### Technical interview #1
 After passing the take-home assignment, I was called in for a technical interview. They asked me to add add an additional integration to the project, Tenable. I implemented a new API-extract step and integrated the Tenable data into the existing HostScans schema.
 
@@ -64,29 +64,57 @@ sequenceDiagram
 ### Data structure:
 ```mermaid
 classDiagram
-    HostScan <|-- CrowdstrikeScan
-    HostScan <|-- QualysScan
-    HostScan <|-- TenableScan
-    class HostScan{
-        hostname:        str
-        CrowdstrikeScan: Optional[CrowdstrikeScan]
-        QualysScan:      Optional[QualysScan]     
+    class CrowdstrikeScan {
+        +str hostname
+        +str device_id
+        +dict scan_data
     }
-    class CrowdstrikeScan{
-        CrowdstrikeScanhostname: str
-        device_id: str
-        scan_data: dict
+
+    class QualysScan {
+        +str dnsHostName
+        +str agentId
+        +dict scan_data
     }
-    class QualysScan{
-        dnsHostName: str
-        agentId: str
-        scan_data: dict
+
+    class TenableScan {
+        +str host_name
+        +str tenable_id
+        +dict scan_data
     }
-    class TenableScan{
-        host_name: str
-        tenable_id: str
-        scan_data:   dict
+
+    class QualysApp {
+        +str app_name
+        +list version_installed
     }
+
+    class TenableApp {
+        +str app_name
+        +str vendor
+        +str version_installed
+    }
+
+    class App {
+        +str app_name
+        +Optional~List~QualysApp~~ QualysApps
+        +Optional~List~TenableApp~~ TenableApps
+        +str vendor
+    }
+
+    class HostScan {
+        +str hostname
+        +Optional~CrowdstrikeScan~ CrowdstrikeScan
+        +Optional~QualysScan~ QualysScan
+        +Optional~TenableScan~ TenableScan
+        +Optional~List~App~~ install_apps
+    }
+
+    HostScan --> CrowdstrikeScan
+    HostScan --> QualysScan
+    HostScan --> TenableScan
+    HostScan --> App
+    App --> QualysApp
+    App --> TenableApp
+
 ```
 
 
